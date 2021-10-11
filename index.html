@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kristine's Garden</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo-header">
+        <img src="images/logo.png" class="logo" />
+      </div>
+    </header>
+
+    <section id="main-box">
+      <div class="container">
+        <div class="form-container">
+          <div class="form-block">
+            <form>
+              <label>Add a Plant</label>
+              <select class="input-forms" name="plantType" id="plantType">
+                <option value="tomato">Tomato</option>
+                <option value="corn">Corn</option>
+                <option value="sunflower">Sunflowers</option>
+              </select>
+              <input id="plantButton" type="button" value="Submit" />
+              <div></div>
+              <label>Water a Plant</label>
+              <select
+                class="input-forms"
+                name="neighbourhood"
+                id="neighbourhood"
+              >
+                <option value="option1">Option1</option>
+                <option value="option2">Option2</option>
+                <option value="option3">Option3</option>
+              </select>
+              <input id="waterButton" type="button" value="Submit" />
+              <div></div>
+            </form>
+          </div>
+        </div>
+        <div id="background-image">
+          <img src="images/background.png" class="background" />
+        </div>
+      </div>
+    </section>
+    <script src="script.js"></script>
+  </body>
+</html>
