@@ -46,5 +46,13 @@ header::after {
   margin-left: 300px;
   margin-right: 300px;
   margin-top: 10px;
-  margin-bottom: ;
+  margin-bottom: 10px;
+}
+
+#canvas {
+  background-image: url("images/background.png");
+  background-size: cover;
+  padding: 0;
+  margin: auto;
+  display: block;
 }
