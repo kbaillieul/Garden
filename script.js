@@ -1,5 +1,5 @@
 "use strict";
-/* create variables for canvas */
+/* create variables for canvas, plant picture inputs, and form buttons */
 let plantDetail = [
   ["tomato", "images/tomato1.png", 100, 275, 100, 100],
   ["tomato2", "images/tomato2.png", 100, 275, 150, 150],
@@ -9,7 +9,7 @@ let plantDetail = [
   ["corn3", "images/corn3.png", 300, 275, 200, 200],
   ["sunflower", "images/sunflower1.png", 500, 275, 100, 100],
   ["sunflower2", "images/sunflower2.png", 500, 275, 150, 150],
-  ["sunflower3", "images/sunflower3.png", 300, 275, 200, 200],
+  ["sunflower3", "images/sunflower3.png", 500, 275, 200, 200],
 ];
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
@@ -29,14 +29,15 @@ function addPlant() {
     if (plantInput === plantDetail[i][0]) {
       let plantPicture = new Image();
       plantPicture.src = plantDetail[i][1];
-      ctx.drawImage(
-        plantPicture,
-        plantDetail[i][2],
-        plantDetail[i][3],
-        plantDetail[i][4],
-        plantDetail[i][5]
-      );
-
+      plantPicture.onload = function () {
+        ctx.drawImage(
+          plantPicture,
+          plantDetail[i][2],
+          plantDetail[i][3],
+          plantDetail[i][4],
+          plantDetail[i][5]
+        );
+      };
       /*Add plant watering option when plant added to canvas but not if plant already present in garden*/
       if (activePlants.includes(plantDetail[i]) === false) {
         const newOption = new Option(
@@ -46,7 +47,7 @@ function addPlant() {
         water.add(newOption, undefined);
       }
       /*Update array to show active plants in garden*/
-      activePlants.push(plantDetail[i]);
+      activePlants.push(plantDetail[i][0]);
     }
   }
 }
@@ -57,17 +58,40 @@ console.log(activePlants);
 function addWater() {
   let waterInput = document.getElementById("water").value;
   for (let i = 0; i < plantDetail.length; i++) {
-    if (waterInput === plantDetail[i][0]) {
+    /* Checks plant in waterInput and if plant has not already been watered (going from plant 1 to plant2) */
+    if (
+      waterInput === plantDetail[i][0] &&
+      activePlants.includes(waterInput) === false
+    ) {
       let plantPicture = new Image();
       plantPicture.src = plantDetail[i][1];
-      ctx.drawImage(
-        plantPicture,
-        plantDetail[i][2],
-        plantDetail[i][3],
-        plantDetail[i][4],
-        plantDetail[i][5]
-      );
-      activePlants.push(plantDetail[i]);
+      plantPicture.onload = function () {
+        ctx.drawImage(
+          plantPicture,
+          plantDetail[i][2],
+          plantDetail[i][3],
+          plantDetail[i][4],
+          plantDetail[i][5]
+        );
+      };
+      activePlants.push(plantDetail[i][0]);
+    } else if (
+      /* checks plant in water input and if plant has been watered before (going from plant 2 to plant 3) */
+      waterInput === plantDetail[i][0] &&
+      activePlants.includes(plantDetail[i][0]) === true
+    ) {
+      let plantPicture = new Image();
+      plantPicture.src = plantDetail[i + 1][1];
+      plantPicture.onload = function () {
+        ctx.drawImage(
+          plantPicture,
+          plantDetail[i + 1][2],
+          plantDetail[i + 1][3],
+          plantDetail[i + 1][4],
+          plantDetail[i + 1][5]
+        );
+      };
+      activePlants.push(plantDetail[i + 1][0]);
     }
   }
 }
