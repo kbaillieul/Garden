@@ -36,70 +36,38 @@ function addPlant() {
         plantDetail[i][4],
         plantDetail[i][5]
       );
-      /*Need to add conditional logic to stop adding same watering option multiple times*/
-      const newOption = new Option(
-        `Water ${plantDetail[i][0]}`,
-        `${plantDetail}`
-      );
-      water.add(newOption, undefined);
+
+      /*Add plant watering option when plant added to canvas but not if plant already present in garden*/
+      if (activePlants.includes(plantDetail[i]) === false) {
+        const newOption = new Option(
+          `Water ${plantDetail[i][0]}`,
+          `${plantDetail[i][0]}2`
+        );
+        water.add(newOption, undefined);
+      }
+      /*Update array to show active plants in garden*/
       activePlants.push(plantDetail[i]);
     }
   }
 }
+
 console.log(activePlants);
+
 /*Function to water plants*/
 function addWater() {
   let waterInput = document.getElementById("water").value;
+  for (let i = 0; i < plantDetail.length; i++) {
+    if (waterInput === plantDetail[i][0]) {
+      let plantPicture = new Image();
+      plantPicture.src = plantDetail[i][1];
+      ctx.drawImage(
+        plantPicture,
+        plantDetail[i][2],
+        plantDetail[i][3],
+        plantDetail[i][4],
+        plantDetail[i][5]
+      );
+      activePlants.push(plantDetail[i]);
+    }
+  }
 }
-
-// const tomato = new Image();
-// tomato.src = "images/tomato1.png";
-// const corn = new Image();
-// corn.src = "images/corn1.png";
-// const sunflower = new Image();
-// sunflower.src = "images/sunflower1.png";
-/* Function to add plants to garden based on user selection and add watering options to second dropdown */
-// function addPlant() {
-//   let plantinput = document.getElementById("plantType").value;
-//   if (plantinput === "tomato") {
-//     ctx.drawImage(tomato, 100, 275, 150, 150);
-//     activePlants.push("tomato1");
-//     const newOption = new Option("Water Tomato", "watertomato");
-//     water.add(newOption, undefined);
-//   } else if (plantinput === "corn") {
-//     ctx.drawImage(corn, 300, 275, 150, 150);
-//     activePlants.push("corn1");
-//     const newOption = new Option("Water Corn", "watercorn");
-//     water.add(newOption, undefined);
-//   } else if (plantinput === "sunflower") {
-//     ctx.drawImage(sunflower, 500, 275, 150, 150);
-//     activePlants.push("sunflower1");
-//     const newOption = new Option("Water Sunflowers", "watersunflowers");
-//     water.add(newOption, undefined);
-//   }
-// }
-
-/*Function to increase plant size when water option selected*/
-// function addWater() {
-//   let waterInput = document.getElementById("water").value;
-//   if (waterInput === "watertomato") {
-//     tomato.src = "images/tomato2.png";
-//     ctx.drawImage(tomato, 100, 275, 200, 200);
-//     activePlants.push("tomato2");
-//   }
-//   if (waterInput === "watertomato" && activePlants.includes("tomato2")) {
-//     tomato.src = "images/tomato3.png";
-//     ctx.drawImage(tomato, 100, 275, 300, 300);
-//     activePlants.push("tomato3");
-//   }
-//   if (waterInput === "watercorn") {
-//     corn.src = "images/corn2.png";
-//     ctx.drawImage(corn, 100, 275, 200, 200);
-//     activePlants.push("corn2");
-//   }
-//   if (waterInput === "watercorn" && activePlants.includes("corn2")) {
-//     corn.src = "images/corn3.png";
-//     ctx.drawImage(corn, 100, 275, 300, 300);
-//     activePlants.push("corn3");
-//   }
-// }
