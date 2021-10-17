@@ -1,15 +1,15 @@
 "use strict";
 /* create variables for canvas, plant picture inputs, and form buttons */
 let plantDetail = [
-  ["tomato", "images/tomato1.png", 100, 275, 100, 100],
-  ["tomato2", "images/tomato2.png", 100, 275, 150, 150],
-  ["tomato3", "images/tomato3.png", 100, 275, 200, 200],
-  ["corn", "images/corn1.png", 300, 275, 100, 100],
-  ["corn2", "images/corn2.png", 300, 275, 150, 150],
-  ["corn3", "images/corn3.png", 300, 275, 200, 200],
-  ["sunflower", "images/sunflower1.png", 500, 275, 100, 100],
-  ["sunflower2", "images/sunflower2.png", 500, 275, 150, 150],
-  ["sunflower3", "images/sunflower3.png", 500, 275, 200, 200],
+  ["tomato", "images/tomato1.png", 100, 300, 100, 100],
+  ["tomato2", "images/tomato2.png", 100, 260, 150, 150],
+  ["tomato3", "images/tomato3.png", 100, 210, 200, 200],
+  ["corn", "images/corn1.png", 300, 300, 100, 100],
+  ["corn2", "images/corn2.png", 280, 260, 150, 150],
+  ["corn3", "images/corn3.png", 270, 210, 200, 200],
+  ["sunflower", "images/sunflower1.png", 500, 300, 100, 100],
+  ["sunflower2", "images/sunflower2.png", 490, 260, 150, 150],
+  ["sunflower3", "images/sunflower3.png", 480, 220, 175, 175],
 ];
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
@@ -39,7 +39,7 @@ function addPlant() {
         );
       };
       /*Add plant watering option when plant added to canvas but not if plant already present in garden*/
-      if (activePlants.includes(plantDetail[i]) === false) {
+      if (activePlants.includes(plantDetail[i][0]) === false) {
         const newOption = new Option(
           `Water ${plantDetail[i][0]}`,
           `${plantDetail[i][0]}2`
@@ -93,5 +93,25 @@ function addWater() {
       };
       activePlants.push(plantDetail[i + 1][0]);
     }
+    if (
+      activePlants.includes("tomato3") &&
+      activePlants.includes("corn3") &&
+      activePlants.includes("sunflower3")
+    ) {
+      animate();
+    }
+  }
+}
+
+let clouds = new Image();
+let xcloud = 75;
+clouds.src = "images/clouds.png";
+
+function animate() {
+  requestAnimationFrame(animate);
+  ctx.clearRect(0, 0, 665, 250);
+  ctx.drawImage(clouds, xcloud, 50, 400, 200);
+  if (xcloud < 160) {
+    xcloud += 0.1;
   }
 }
