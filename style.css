@@ -4,23 +4,11 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-header {
-  background: #f1e8d8;
-}
-
-header::after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
 .logo {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  display: none;
 }
 
-.background {
+.background-container {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -28,25 +16,29 @@ header::after {
 
 .form-block {
   position: relative;
-  width: 30%;
-  height: 30%;
+  width: 80%;
+  height: 75%;
   margin: auto;
   margin-top: 10px;
   text-align: center;
   line-height: 1.5em;
   padding-bottom: 20px;
   font-weight: bold;
-  text-transform: uppercase;
   color: white;
+}
+
+.form-block p {
+  font-size: 12px;
+  color: #f1e8d8;
+  line-height: 1.1em;
+  margin: 0 auto;
 }
 .form-container {
   padding-top: 15px;
   border-radius: 15px;
   border: 2px solid #f1e8d8;
-  margin-left: 300px;
-  margin-right: 300px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  width: 100%;
+  margin: 20px auto;
 }
 
 #canvas {
@@ -55,4 +47,59 @@ header::after {
   padding: 0;
   margin: auto;
   display: block;
+}
+
+@media only screen and (min-width: 768px) {
+  header {
+    background: #f1e8d8;
+  }
+
+  header::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .form-container {
+    padding-top: 15px;
+    border-radius: 15px;
+    border: 2px solid #f1e8d8;
+    width: 600px;
+    margin: 10px auto;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .form-block {
+    position: relative;
+    width: 80%;
+    height: 80%;
+    margin: auto;
+    margin-top: 10px;
+    text-align: center;
+    line-height: 1.5em;
+    padding-bottom: 20px;
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+  }
+
+  .form-block p {
+    font-size: 16px;
+    color: #f1e8d8;
+    line-height: 1.1em;
+    margin: 0 auto;
+  }
+  .form-container {
+    padding-top: 15px;
+    border-radius: 15px;
+    border: 2px solid #f1e8d8;
+    width: 700px;
+    margin: 10px auto;
+  }
 }

@@ -3,6 +3,7 @@
   <head>
     <title>Kristine's Garden</title>
     <link rel="stylesheet" type="text/css" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
     <header>
@@ -15,8 +16,13 @@
       <div class="container">
         <div class="form-container">
           <div class="form-block">
+            <p>
+              Choose plants from the 'Add a Plant' dropdown to add to your
+              garden and watering options from the 'Water a Plant' dropdown. Add
+              every plant and water them twice each for a surprise!
+            </p>
             <form>
-              <label>Add a Plant</label>
+              <label>ADD A PLANT</label>
               <select class="input-forms" name="plantType" id="plantType">
                 <option value="tomato">Tomato</option>
                 <option value="corn">Corn</option>
@@ -24,7 +30,7 @@
               </select>
               <input id="plantButton" type="button" value="Submit" />
               <div></div>
-              <label>Water a Plant</label>
+              <label>WATER A PLANT</label>
               <select class="input-forms" name="water" id="water"></select>
               <input id="waterButton" type="button" value="Submit" />
               <div></div>
@@ -34,7 +40,7 @@
         <!-- canvas -->
         <div id="image-block">
           <div class="background-container"></div>
-          <canvas id="canvas" width="665" height="800"></canvas>
+          <canvas id="canvas" width="375" height="500"></canvas>
         </div>
       </div>
     </section>

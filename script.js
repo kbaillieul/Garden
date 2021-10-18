@@ -1,15 +1,15 @@
 "use strict";
 /* create variables for canvas, plant picture inputs, and form buttons */
 let plantDetail = [
-  ["tomato", "images/tomato1.png", 100, 300, 100, 100],
-  ["tomato2", "images/tomato2.png", 100, 260, 150, 150],
-  ["tomato3", "images/tomato3.png", 100, 210, 200, 200],
-  ["corn", "images/corn1.png", 300, 300, 100, 100],
-  ["corn2", "images/corn2.png", 280, 260, 150, 150],
-  ["corn3", "images/corn3.png", 270, 210, 200, 200],
-  ["sunflower", "images/sunflower1.png", 500, 300, 100, 100],
-  ["sunflower2", "images/sunflower2.png", 490, 260, 150, 150],
-  ["sunflower3", "images/sunflower3.png", 480, 220, 175, 175],
+  ["tomato", "images/tomato1.png", 50, 150, 100, 100],
+  ["tomato2", "images/tomato2.png", 50, 130, 125, 125],
+  ["tomato3", "images/tomato3.png", 50, 100, 150, 150],
+  ["corn", "images/corn1.png", 170, 150, 100, 100],
+  ["corn2", "images/corn2.png", 160, 130, 125, 125],
+  ["corn3", "images/corn3.png", 150, 100, 150, 150],
+  ["sunflower", "images/sunflower1.png", 250, 150, 100, 100],
+  ["sunflower2", "images/sunflower2.png", 250, 130, 125, 125],
+  ["sunflower3", "images/sunflower3.png", 250, 100, 145, 145],
 ];
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
@@ -103,14 +103,15 @@ function addWater() {
   }
 }
 
+/*Function for animated clouds when all plant reach growth stage 3 */
 let clouds = new Image();
 let xcloud = 75;
 clouds.src = "images/clouds.png";
 
 function animate() {
   requestAnimationFrame(animate);
-  ctx.clearRect(0, 0, 665, 250);
-  ctx.drawImage(clouds, xcloud, 50, 400, 200);
+  ctx.clearRect(0, 0, 665, 125);
+  ctx.drawImage(clouds, xcloud, 0, 400, 125);
   if (xcloud < 160) {
     xcloud += 0.1;
   }
