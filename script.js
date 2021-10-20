@@ -30,7 +30,7 @@ let clouds = {
   xcloud: canvas.width,
   rainImg: new Image(),
   yrain: 125,
-  moving: true,
+  counter: 0,
 };
 
 clouds.cloudImg.src = "images/clouds.png";
@@ -133,6 +133,29 @@ function animate() {
   } else if (clouds.xcloud === 0) {
     animateRain();
     clouds.xcloud -= 1;
+    clouds.counter += 1;
+  } else if (clouds.counter === 1 || clouds.counter < 50) {
+    clouds.counter += 1;
+  } else if (clouds.counter === 50) {
+    rainArray = [];
+    for (let i = 0; i < 10; i++) {
+      let x = Math.random() * canvas.width;
+      rainArray.push(new Rain(x, 125, 1));
+    }
+    animateRain();
+    clouds.counter += 1;
+  } else if (clouds.counter > 50 && clouds.counter < 100) {
+    clouds.counter += 1;
+  } else if (clouds.counter === 100) {
+    rainArray = [];
+    for (let i = 0; i < 10; i++) {
+      let x = Math.random() * canvas.width;
+      rainArray.push(new Rain(x, 125, 1));
+    }
+    animateRain();
+    clouds.counter += 1;
+  } else if (clouds.counter > 100) {
+    clouds.counter += 1;
   }
 }
 
