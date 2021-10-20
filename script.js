@@ -14,13 +14,22 @@ let plantDetail = [
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 /* Event listener for Add Plant and Add Water Submit buttons */
-let plantSubmit = document.getElementById("plantButton");
+let submit = {
+  plantSubmit: document.getElementById("plantButton"),
+  waterSubmit: document.getElementById("waterButton"),
+};
 const water = document.querySelector("#water");
-let waterSubmit = document.getElementById("waterButton");
-plantSubmit.addEventListener("click", addPlant);
-waterSubmit.addEventListener("click", addWater);
+submit.plantSubmit.addEventListener("click", addPlant);
+submit.waterSubmit.addEventListener("click", addWater);
 /* Array to hold plants present in garden */
 let activePlants = [];
+/*Function for animated clouds when all plant reach growth stage 3 */
+let clouds = {
+  cloudImg: new Image(),
+  xcloud: canvas.width,
+};
+
+clouds.cloudImg.src = "images/clouds.png";
 
 /*Function to add plant images to canvas */
 function addPlant() {
@@ -98,21 +107,18 @@ function addWater() {
       activePlants.includes("corn3") &&
       activePlants.includes("sunflower3")
     ) {
+      // call animate function when activePlants array contains all plants at growth stage 3 to initiate rain animation
       animate();
     }
   }
 }
 
-/*Function for animated clouds when all plant reach growth stage 3 */
-let clouds = new Image();
-let xcloud = 75;
-clouds.src = "images/clouds.png";
-
+/* animate function for clouds to move across canvas and rain to begin */
 function animate() {
   requestAnimationFrame(animate);
-  ctx.clearRect(0, 0, 665, 125);
-  ctx.drawImage(clouds, xcloud, 0, 400, 125);
-  if (xcloud < 160) {
-    xcloud += 0.1;
+  ctx.clearRect(0, 0, 375, 125);
+  ctx.drawImage(clouds.cloudImg, clouds.xcloud, 0, 375, 125);
+  if (clouds.xcloud > 0) {
+    clouds.xcloud -= 1;
   }
 }

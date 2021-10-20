@@ -66,9 +66,6 @@ body {
     margin-right: auto;
   }
   .form-container {
-    padding-top: 15px;
-    border-radius: 15px;
-    border: 2px solid #f1e8d8;
     width: 600px;
     margin: 10px auto;
   }
@@ -76,29 +73,18 @@ body {
 
 @media only screen and (min-width: 1000px) {
   .form-block {
-    position: relative;
     width: 80%;
     height: 80%;
-    margin: auto;
-    margin-top: 10px;
-    text-align: center;
-    line-height: 1.5em;
-    padding-bottom: 20px;
-    font-weight: bold;
-    color: white;
     font-size: 20px;
   }
 
   .form-block p {
     font-size: 16px;
-    color: #f1e8d8;
-    line-height: 1.1em;
     margin: 0 auto;
   }
   .form-container {
     padding-top: 15px;
     border-radius: 15px;
-    border: 2px solid #f1e8d8;
     width: 700px;
     margin: 10px auto;
   }
