@@ -23,13 +23,18 @@ submit.plantSubmit.addEventListener("click", addPlant);
 submit.waterSubmit.addEventListener("click", addWater);
 /* Array to hold plants present in garden */
 let activePlants = [];
+let rainArray = [];
 /*Function for animated clouds when all plant reach growth stage 3 */
 let clouds = {
   cloudImg: new Image(),
   xcloud: canvas.width,
+  rainImg: new Image(),
+  yrain: 125,
+  moving: true,
 };
 
 clouds.cloudImg.src = "images/clouds.png";
+clouds.rainImg.src = "images/rain.png";
 
 /*Function to add plant images to canvas */
 function addPlant() {
@@ -108,6 +113,11 @@ function addWater() {
       activePlants.includes("sunflower3")
     ) {
       // call animate function when activePlants array contains all plants at growth stage 3 to initiate rain animation
+
+      for (let i = 0; i < 10; i++) {
+        let x = Math.random() * canvas.width;
+        rainArray.push(new Rain(x, 125, 1));
+      }
       animate();
     }
   }
@@ -120,5 +130,31 @@ function animate() {
   ctx.drawImage(clouds.cloudImg, clouds.xcloud, 0, 375, 125);
   if (clouds.xcloud > 0) {
     clouds.xcloud -= 1;
+  } else if (clouds.xcloud === 0) {
+    animateRain();
+    clouds.xcloud -= 1;
+  }
+}
+
+function Rain(x, y, dy) {
+  this.x = x;
+  this.y = y;
+  this.dy = dy;
+  this.draw = function () {
+    ctx.drawImage(clouds.rainImg, this.x, this.y, 25, 25);
+  };
+  this.update = function () {
+    if (this.y < 150) {
+      this.y += this.dy;
+      this.draw();
+    }
+  };
+}
+
+function animateRain() {
+  requestAnimationFrame(animateRain);
+  ctx.clearRect(0, 80, 375, 120);
+  for (let i = 0; i < rainArray.length; i++) {
+    rainArray[i].update();
   }
 }
