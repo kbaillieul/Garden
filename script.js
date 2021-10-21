@@ -1,15 +1,15 @@
 "use strict";
 /* create variables for canvas, plant picture inputs, and form buttons */
 let plantDetail = [
-  ["tomato", "images/tomato1.png", 50, 150, 100, 100],
-  ["tomato2", "images/tomato2.png", 50, 130, 125, 125],
-  ["tomato3", "images/tomato3.png", 50, 100, 150, 150],
-  ["corn", "images/corn1.png", 170, 150, 100, 100],
-  ["corn2", "images/corn2.png", 160, 130, 125, 125],
-  ["corn3", "images/corn3.png", 150, 100, 150, 150],
-  ["sunflower", "images/sunflower1.png", 250, 150, 100, 100],
-  ["sunflower2", "images/sunflower2.png", 250, 130, 125, 125],
-  ["sunflower3", "images/sunflower3.png", 250, 100, 145, 145],
+  ["tomato", "images/tomato1.png", 50, 170, 80, 80],
+  ["tomato2", "images/tomato2.png", 50, 160, 90, 90],
+  ["tomato3", "images/tomato3.png", 50, 150, 100, 100],
+  ["corn", "images/corn1.png", 170, 170, 80, 80],
+  ["corn2", "images/corn2.png", 165, 160, 90, 90],
+  ["corn3", "images/corn3.png", 160, 150, 100, 100],
+  ["sunflower", "images/sunflower1.png", 250, 170, 80, 80],
+  ["sunflower2", "images/sunflower2.png", 250, 160, 90, 90],
+  ["sunflower3", "images/sunflower3.png", 250, 150, 100, 100],
 ];
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
@@ -77,6 +77,12 @@ function addWater() {
       waterInput === plantDetail[i][0] &&
       activePlants.includes(waterInput) === false
     ) {
+      ctx.clearRect(
+        plantDetail[i][2],
+        plantDetail[i][3],
+        plantDetail[i][4],
+        plantDetail[i][5]
+      );
       let plantPicture = new Image();
       plantPicture.src = plantDetail[i][1];
       plantPicture.onload = function () {
@@ -94,6 +100,12 @@ function addWater() {
       waterInput === plantDetail[i][0] &&
       activePlants.includes(plantDetail[i][0]) === true
     ) {
+      ctx.clearRect(
+        plantDetail[i][2],
+        plantDetail[i][3],
+        plantDetail[i][4],
+        plantDetail[i][5]
+      );
       let plantPicture = new Image();
       plantPicture.src = plantDetail[i + 1][1];
       plantPicture.onload = function () {
