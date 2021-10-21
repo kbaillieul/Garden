@@ -29,12 +29,14 @@ let clouds = {
   cloudImg: new Image(),
   xcloud: canvas.width,
   rainImg: new Image(),
-  yrain: 125,
   counter: 0,
+  bannerImg: new Image(),
+  xbanner: canvas.width,
 };
 
 clouds.cloudImg.src = "images/clouds.png";
 clouds.rainImg.src = "images/rain.png";
+clouds.bannerImg.src = "images/banner.png";
 
 /*Function to add plant images to canvas */
 function addPlant() {
@@ -138,8 +140,8 @@ function addWater() {
 /* animate function for clouds to move across canvas and rain to begin */
 function animate() {
   requestAnimationFrame(animate);
-  ctx.clearRect(0, 0, 375, 125);
-  ctx.drawImage(clouds.cloudImg, clouds.xcloud, 0, 375, 125);
+  ctx.clearRect(0, 0, 375, 100);
+  ctx.drawImage(clouds.cloudImg, clouds.xcloud, 0, 375, 100);
   if (clouds.xcloud > 0) {
     clouds.xcloud -= 1;
   } else if (clouds.xcloud === 0) {
@@ -152,7 +154,7 @@ function animate() {
     rainArray = [];
     for (let i = 0; i < 10; i++) {
       let x = Math.random() * canvas.width;
-      rainArray.push(new Rain(x, 125, 1));
+      rainArray.push(new Rain(x, 80, 1));
     }
     animateRain();
     clouds.counter += 1;
@@ -162,12 +164,15 @@ function animate() {
     rainArray = [];
     for (let i = 0; i < 10; i++) {
       let x = Math.random() * canvas.width;
-      rainArray.push(new Rain(x, 125, 1));
+      rainArray.push(new Rain(x, 60, 1));
     }
     animateRain();
     clouds.counter += 1;
-  } else if (clouds.counter > 100) {
+  } else if (clouds.counter > 100 && clouds.counter < 500) {
     clouds.counter += 1;
+    clouds.xcloud -= 1;
+  } else if (clouds.counter === 500) {
+    ctx.drawImage(clouds.bannerImg, 100, 0, 200, 150);
   }
 }
 
@@ -179,7 +184,7 @@ function Rain(x, y, dy) {
     ctx.drawImage(clouds.rainImg, this.x, this.y, 25, 25);
   };
   this.update = function () {
-    if (this.y < 150) {
+    if (this.y < 130) {
       this.y += this.dy;
       this.draw();
     }
@@ -188,7 +193,7 @@ function Rain(x, y, dy) {
 
 function animateRain() {
   requestAnimationFrame(animateRain);
-  ctx.clearRect(0, 80, 375, 120);
+  ctx.clearRect(0, 100, 375, 50);
   for (let i = 0; i < rainArray.length; i++) {
     rainArray[i].update();
   }
