@@ -49,6 +49,15 @@ body {
   display: block;
 }
 
+#playAgainButton {
+  background: #f14a58;
+  color: #fff;
+  border: 1pxsolid#eee;
+  border-radius: 20px;
+  box-shadow: 5px5px5px#eee;
+  text-shadow: none;
+}
+
 @media only screen and (min-width: 768px) {
   header {
     background: #f1e8d8;

@@ -17,10 +17,12 @@ const ctx = canvas.getContext("2d");
 let submit = {
   plantSubmit: document.getElementById("plantButton"),
   waterSubmit: document.getElementById("waterButton"),
+  restartSubmit: document.getElementById("playAgainButton"),
 };
 const water = document.querySelector("#water");
 submit.plantSubmit.addEventListener("click", addPlant);
 submit.waterSubmit.addEventListener("click", addWater);
+submit.restartSubmit.addEventListener("click", restart);
 /* Array to hold plants present in garden */
 let activePlants = [];
 let rainArray = [];
@@ -33,7 +35,7 @@ let clouds = {
   bannerImg: new Image(),
   xbanner: canvas.width,
 };
-
+/*set image sources for images used in animations*/
 clouds.cloudImg.src = "images/clouds.png";
 clouds.rainImg.src = "images/rain.png";
 clouds.bannerImg.src = "images/banner.png";
@@ -68,8 +70,6 @@ function addPlant() {
   }
 }
 
-console.log(activePlants);
-
 /*Function to water plants*/
 function addWater() {
   let waterInput = document.getElementById("water").value;
@@ -79,6 +79,7 @@ function addWater() {
       waterInput === plantDetail[i][0] &&
       activePlants.includes(waterInput) === false
     ) {
+      /*clear canvas of previous plant image*/
       ctx.clearRect(
         plantDetail[i][2],
         plantDetail[i][3],
@@ -142,15 +143,18 @@ function animate() {
   requestAnimationFrame(animate);
   ctx.clearRect(0, 0, 375, 100);
   ctx.drawImage(clouds.cloudImg, clouds.xcloud, 0, 375, 100);
+  /*Cloud image starts at right of canvas and moves towards left side*/
   if (clouds.xcloud > 0) {
     clouds.xcloud -= 1;
   } else if (clouds.xcloud === 0) {
+    /*stop cloud animation at x=0 of canvas, then start counter for rain animation intervals*/
     animateRain();
     clouds.xcloud -= 1;
     clouds.counter += 1;
   } else if (clouds.counter === 1 || clouds.counter < 50) {
     clouds.counter += 1;
   } else if (clouds.counter === 50) {
+    /*Create 10 Rain objects at randomized x locations across canvas and add to rainArray. Call animateRain function to animate rain objects stored in rainArray. */
     rainArray = [];
     for (let i = 0; i < 10; i++) {
       let x = Math.random() * canvas.width;
@@ -169,6 +173,7 @@ function animate() {
     animateRain();
     clouds.counter += 1;
   } else if (clouds.counter > 100 && clouds.counter < 500) {
+    /* After 3 sets of rain animations, move cloud image left to move out of canvas then display play again banner*/
     clouds.counter += 1;
     clouds.xcloud -= 1;
   } else if (clouds.counter === 500) {
@@ -176,6 +181,7 @@ function animate() {
   }
 }
 
+/* Constructor function to create rain objects at different x values along canvas*/
 function Rain(x, y, dy) {
   this.x = x;
   this.y = y;
@@ -191,10 +197,20 @@ function Rain(x, y, dy) {
   };
 }
 
+/*Function to initiate rain animation using Rain objects */
 function animateRain() {
   requestAnimationFrame(animateRain);
   ctx.clearRect(0, 100, 375, 50);
   for (let i = 0; i < rainArray.length; i++) {
     rainArray[i].update();
   }
+}
+
+/*Function to reload page on Play Again button click event */
+function restart() {
+  window.location.reload(false);
+  activePlants = [];
+  rainArray = [];
+  clouds.counter = 0;
+  clouds.xcloud = canvas.width;
 }
