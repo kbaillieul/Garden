@@ -26,6 +26,7 @@ submit.restartSubmit.addEventListener("click", restart);
 /* Array to hold plants present in garden */
 let activePlants = [];
 let rainArray = [];
+let timer = 0;
 /*Function for animated clouds when all plant reach growth stage 3 */
 let clouds = {
   cloudImg: new Image(),
@@ -128,58 +129,87 @@ function addWater() {
       activePlants.includes("sunflower3")
     ) {
       // call animate function when activePlants array contains all plants at growth stage 3 to initiate rain animation
-
-      for (let i = 0; i < 10; i++) {
-        let x = Math.random() * canvas.width;
-        rainArray.push(new Rain(x, 125, 1));
-      }
-      animate();
+      setInterval(function () {
+        timer += 1;
+        if (timer === 2) {
+          animate1();
+        } else if (timer === 20) {
+          for (let i = 0; i < 10; i++) {
+            let x = Math.random() * canvas.width;
+            rainArray.push(new Rain(x, 125, 0.1));
+          }
+          animateRain1();
+        } else if (timer === 40) {
+          rainArray = [];
+          for (let i = 0; i < 10; i++) {
+            let x = Math.random() * canvas.width;
+            rainArray.push(new Rain(x, 125, 0.1));
+          }
+          animateRain1();
+        } else if (timer === 60) {
+          for (let i = 0; i < 10; i++) {
+            rainArray = [];
+            let x = Math.random() * canvas.width;
+            rainArray.push(new Rain(x, 125, 0.1));
+          }
+          animateRain1();
+        }
+      }, 1000);
     }
+  }
+}
+
+function animate1() {
+  requestAnimationFrame(animate1);
+  ctx.clearRect(0, 0, 375, 100);
+  ctx.drawImage(clouds.cloudImg, clouds.xcloud, 0, 375, 100);
+  if (clouds.xcloud > 0) {
+    clouds.xcloud -= 1.5;
   }
 }
 
 /* animate function for clouds to move across canvas and rain to begin */
-function animate() {
-  requestAnimationFrame(animate);
-  ctx.clearRect(0, 0, 375, 100);
-  ctx.drawImage(clouds.cloudImg, clouds.xcloud, 0, 375, 100);
-  /*Cloud image starts at right of canvas and moves towards left side*/
-  if (clouds.xcloud > 0) {
-    clouds.xcloud -= 1;
-  } else if (clouds.xcloud === 0) {
-    /*stop cloud animation at x=0 of canvas, then start counter for rain animation intervals*/
-    animateRain();
-    clouds.xcloud -= 1;
-    clouds.counter += 1;
-  } else if (clouds.counter === 1 || clouds.counter < 50) {
-    clouds.counter += 1;
-  } else if (clouds.counter === 50) {
-    /*Create 10 Rain objects at randomized x locations across canvas and add to rainArray. Call animateRain function to animate rain objects stored in rainArray. */
-    rainArray = [];
-    for (let i = 0; i < 10; i++) {
-      let x = Math.random() * canvas.width;
-      rainArray.push(new Rain(x, 80, 1));
-    }
-    animateRain();
-    clouds.counter += 1;
-  } else if (clouds.counter > 50 && clouds.counter < 100) {
-    clouds.counter += 1;
-  } else if (clouds.counter === 100) {
-    rainArray = [];
-    for (let i = 0; i < 10; i++) {
-      let x = Math.random() * canvas.width;
-      rainArray.push(new Rain(x, 60, 1));
-    }
-    animateRain();
-    clouds.counter += 1;
-  } else if (clouds.counter > 100 && clouds.counter < 500) {
-    /* After 3 sets of rain animations, move cloud image left to move out of canvas then display play again banner*/
-    clouds.counter += 1;
-    clouds.xcloud -= 1;
-  } else if (clouds.counter === 500) {
-    ctx.drawImage(clouds.bannerImg, 100, 0, 200, 150);
-  }
-}
+// function animate() {
+//   requestAnimationFrame(animate);
+//   ctx.clearRect(0, 0, 375, 100);
+//   ctx.drawImage(clouds.cloudImg, clouds.xcloud, 0, 375, 100);
+//   /*Cloud image starts at right of canvas and moves towards left side*/
+//   if (clouds.xcloud > 0) {
+//     clouds.xcloud -= 1;
+//   } else if (clouds.xcloud === 0) {
+//     /*stop cloud animation at x=0 of canvas, then start counter for rain animation intervals*/
+//     animateRain();
+//     clouds.xcloud -= 1;
+//     clouds.counter += 1;
+//   } else if (clouds.counter === 1 || clouds.counter < 50) {
+//     clouds.counter += 1;
+//   } else if (clouds.counter === 50) {
+//     /*Create 10 Rain objects at randomized x locations across canvas and add to rainArray. Call animateRain function to animate rain objects stored in rainArray. */
+//     rainArray = [];
+//     for (let i = 0; i < 10; i++) {
+//       let x = Math.random() * canvas.width;
+//       rainArray.push(new Rain(x, 80, 1));
+//     }
+//     animateRain();
+//     clouds.counter += 1;
+//   } else if (clouds.counter > 50 && clouds.counter < 100) {
+//     clouds.counter += 1;
+//   } else if (clouds.counter === 100) {
+//     rainArray = [];
+//     for (let i = 0; i < 10; i++) {
+//       let x = Math.random() * canvas.width;
+//       rainArray.push(new Rain(x, 60, 1));
+//     }
+//     animateRain();
+//     clouds.counter += 1;
+//   } else if (clouds.counter > 100 && clouds.counter < 500) {
+//     /* After 3 sets of rain animations, move cloud image left to move out of canvas then display play again banner*/
+//     clouds.counter += 1;
+//     clouds.xcloud -= 1;
+//   } else if (clouds.counter === 500) {
+//     ctx.drawImage(clouds.bannerImg, 100, 0, 200, 150);
+//   }
+// }
 
 /* Constructor function to create rain objects at different x values along canvas*/
 function Rain(x, y, dy) {
@@ -198,8 +228,9 @@ function Rain(x, y, dy) {
 }
 
 /*Function to initiate rain animation using Rain objects */
-function animateRain() {
-  requestAnimationFrame(animateRain);
+
+function animateRain1() {
+  requestAnimationFrame(animateRain1);
   ctx.clearRect(0, 100, 375, 50);
   for (let i = 0; i < rainArray.length; i++) {
     rainArray[i].update();
