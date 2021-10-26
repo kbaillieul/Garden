@@ -27,6 +27,7 @@ submit.restartSubmit.addEventListener("click", restart);
 let activePlants = [];
 let rainArray = [];
 let timer = 0;
+let reqAnim;
 /*Function for animated clouds when all plant reach growth stage 3 */
 let clouds = {
   cloudImg: new Image(),
@@ -134,19 +135,22 @@ function addWater() {
         if (timer === 2) {
           animateclouds1();
         } else if (timer === 10) {
+          stopAnim();
           for (let i = 0; i < 10; i++) {
             let x = Math.random() * canvas.width;
-            rainArray.push(new Rain(x, 100, 1));
+            rainArray.push(new Rain(x, 60, 1));
           }
           animateRain1();
         } else if (timer === 12) {
+          stopAnim();
           rainArray = [];
           for (let i = 0; i < 10; i++) {
             let x = Math.random() * canvas.width;
-            rainArray.push(new Rain(x, 80, 1));
+            rainArray.push(new Rain(x, 60, 1));
           }
           animateRain1();
         } else if (timer === 14) {
+          stopAnim();
           rainArray = [];
           for (let i = 0; i < 10; i++) {
             let x = Math.random() * canvas.width;
@@ -154,8 +158,10 @@ function addWater() {
           }
           animateRain1();
         } else if (timer === 16) {
+          stopAnim();
           animateclouds2();
         } else if (timer === 20) {
+          stopAnim();
           animatebanner();
         }
       }, 1000);
@@ -171,6 +177,13 @@ function animateclouds1() {
   if (clouds.xcloud > 0) {
     clouds.xcloud -= 2;
   }
+  // if (clouds.xcloud === 1) {
+  //   stopAnim();
+  //   for (let i = 0; i < 10; i++) {
+  //     let x = Math.random() * canvas.width;
+  //     rainArray.push(new Rain(x, 60, 1));
+  //   }
+  //   animateRain1();
 }
 /*function to move clouds from middle of canvas to left*/
 function animateclouds2() {
@@ -206,6 +219,7 @@ function Rain(x, y, dy) {
 function animateRain1() {
   requestAnimationFrame(animateRain1);
   ctx.clearRect(0, 100, 375, 50);
+
   for (let i = 0; i < rainArray.length; i++) {
     rainArray[i].update();
   }
@@ -219,3 +233,24 @@ function restart() {
   clouds.counter = 0;
   clouds.xcloud = canvas.width;
 }
+
+/*function to cancel animation frame*/
+function stopAnim() {
+  cancelAnimationFrame(reqAnim);
+}
+
+// function animateclouds1() {
+//   requestAnimationFrame(animateclouds1);
+//   ctx.clearRect(0, 0, 375, 100);
+//   ctx.drawImage(clouds.cloudImg, clouds.xcloud, 0, 375, 100);
+//   if (clouds.xcloud > 0) {
+//     clouds.xcloud -= 2;
+//   }
+//   if (clouds.xcloud === 1) {
+//     stopAnim();
+//     for (let i = 0; i < 10; i++) {
+//       let x = Math.random() * canvas.width;
+//       rainArray.push(new Rain(x, 60, 1));
+//     }
+//     animateRain1();
+//   }
