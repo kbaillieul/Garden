@@ -33,9 +33,7 @@ let clouds = {
   cloudImg: new Image(),
   xcloud: canvas.width,
   rainImg: new Image(),
-  counter: 0,
   bannerImg: new Image(),
-  xbanner: canvas.width,
 };
 /*set image sources for images used in animations*/
 clouds.cloudImg.src = "images/clouds.png";
@@ -46,7 +44,10 @@ clouds.bannerImg.src = "images/banner.png";
 function addPlant() {
   let plantInput = document.getElementById("plantType").value;
   for (let i = 0; i < plantDetail.length; i++) {
-    if (plantInput === plantDetail[i][0]) {
+    if (
+      plantInput === plantDetail[i][0] &&
+      activePlants.includes(plantInput) === false
+    ) {
       let plantPicture = new Image();
       plantPicture.src = plantDetail[i][1];
       plantPicture.onload = function () {
@@ -177,13 +178,6 @@ function animateclouds1() {
   if (clouds.xcloud > 0) {
     clouds.xcloud -= 2;
   }
-  // if (clouds.xcloud === 1) {
-  //   stopAnim();
-  //   for (let i = 0; i < 10; i++) {
-  //     let x = Math.random() * canvas.width;
-  //     rainArray.push(new Rain(x, 60, 1));
-  //   }
-  //   animateRain1();
 }
 /*function to move clouds from middle of canvas to left*/
 function animateclouds2() {
@@ -238,19 +232,3 @@ function restart() {
 function stopAnim() {
   cancelAnimationFrame(reqAnim);
 }
-
-// function animateclouds1() {
-//   requestAnimationFrame(animateclouds1);
-//   ctx.clearRect(0, 0, 375, 100);
-//   ctx.drawImage(clouds.cloudImg, clouds.xcloud, 0, 375, 100);
-//   if (clouds.xcloud > 0) {
-//     clouds.xcloud -= 2;
-//   }
-//   if (clouds.xcloud === 1) {
-//     stopAnim();
-//     for (let i = 0; i < 10; i++) {
-//       let x = Math.random() * canvas.width;
-//       rainArray.push(new Rain(x, 60, 1));
-//     }
-//     animateRain1();
-//   }
