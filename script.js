@@ -9,7 +9,7 @@ let plantDetail = [
   ["corn3", "images/corn3.png", 160, 150, 100, 100],
   ["sunflower", "images/sunflower1.png", 250, 170, 80, 80],
   ["sunflower2", "images/sunflower2.png", 250, 160, 90, 90],
-  ["sunflower3", "images/sunflower3.png", 250, 150, 100, 100],
+  ["sunflower3", "images/sunflower3.png", 250, 160, 100, 100],
 ];
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
@@ -126,43 +126,101 @@ function addWater() {
       };
       activePlants.push(plantDetail[i + 1][0]);
     }
-    if (
-      activePlants.includes("tomato3") &&
-      activePlants.includes("corn3") &&
-      activePlants.includes("sunflower3")
-    ) {
+    if (activePlants.length === 9 && activePlants[8] === "tomato3") {
       console.log(activePlants);
       // timer calls animate functions at set intervals for cloud, rain, and banner animations
-      // setInterval(function () {
-      //   timer += 1;
-      //   if (timer === 3) {
-      //     animateclouds1();
-      //   } else if (timer === 11) {
-      //     for (let i = 0; i < 10; i++) {
-      //       let x = Math.random() * canvas.width;
-      //       rainArray.push(new Rain(x, 60, 1));
-      //     }
-      //     animateRain1();
-      //   } else if (timer === 13) {
-      //     rainArray = [];
-      //     for (let i = 0; i < 10; i++) {
-      //       let x = Math.random() * canvas.width;
-      //       rainArray.push(new Rain(x, 60, 1));
-      //     }
-      //     animateRain1();
-      //   } else if (timer === 15) {
-      //     rainArray = [];
-      //     for (let i = 0; i < 10; i++) {
-      //       let x = Math.random() * canvas.width;
-      //       rainArray.push(new Rain(x, 60, 1));
-      //     }
-      //     animateRain1();
-      //   } else if (timer === 17) {
-      //     animateclouds2();
-      //   } else if (timer === 21) {
-      //     animatebanner();
-      //   }
-      // }, 1000);
+      setInterval(function () {
+        timer += 1;
+        if (timer === 2) {
+          animateclouds1();
+        } else if (timer === 30) {
+          for (let i = 0; i < 10; i++) {
+            let x = Math.random() * canvas.width;
+            rainArray.push(new Rain(x, 60, 1));
+          }
+          animateRain1();
+        } else if (timer === 38) {
+          rainArray = [];
+          for (let i = 0; i < 10; i++) {
+            let x = Math.random() * canvas.width;
+            rainArray.push(new Rain(x, 60, 1));
+          }
+          animateRain1();
+        } else if (timer === 44) {
+          rainArray = [];
+          for (let i = 0; i < 10; i++) {
+            let x = Math.random() * canvas.width;
+            rainArray.push(new Rain(x, 60, 1));
+          }
+          animateRain1();
+        } else if (timer === 55) {
+          animateclouds2();
+        } else if (timer === 70) {
+          animatebanner();
+        }
+      }, 1000);
+    } else if (activePlants.length === 9 && activePlants[8] === "corn3") {
+      setInterval(function () {
+        timer += 1;
+        if (timer === 3) {
+          animateclouds1();
+        } else if (timer === 20) {
+          for (let i = 0; i < 10; i++) {
+            let x = Math.random() * canvas.width;
+            rainArray.push(new Rain(x, 60, 1));
+          }
+          animateRain1();
+        } else if (timer === 24) {
+          rainArray = [];
+          for (let i = 0; i < 10; i++) {
+            let x = Math.random() * canvas.width;
+            rainArray.push(new Rain(x, 60, 1));
+          }
+          animateRain1();
+        } else if (timer === 28) {
+          rainArray = [];
+          for (let i = 0; i < 10; i++) {
+            let x = Math.random() * canvas.width;
+            rainArray.push(new Rain(x, 60, 1));
+          }
+          animateRain1();
+        } else if (timer === 30) {
+          animateclouds2();
+        } else if (timer === 35) {
+          animatebanner();
+        }
+      }, 1000);
+    } else if (activePlants.length === 9 && activePlants[8] === "sunflower3") {
+      setInterval(function () {
+        timer += 1;
+        if (timer === 3) {
+          animateclouds1();
+        } else if (timer === 10) {
+          for (let i = 0; i < 10; i++) {
+            let x = Math.random() * canvas.width;
+            rainArray.push(new Rain(x, 60, 1));
+          }
+          animateRain1();
+        } else if (timer === 12) {
+          rainArray = [];
+          for (let i = 0; i < 10; i++) {
+            let x = Math.random() * canvas.width;
+            rainArray.push(new Rain(x, 60, 1));
+          }
+          animateRain1();
+        } else if (timer === 14) {
+          rainArray = [];
+          for (let i = 0; i < 10; i++) {
+            let x = Math.random() * canvas.width;
+            rainArray.push(new Rain(x, 60, 1));
+          }
+          animateRain1();
+        } else if (timer === 16) {
+          animateclouds2();
+        } else if (timer === 18) {
+          animatebanner();
+        }
+      }, 1000);
     }
   }
 }
@@ -183,6 +241,7 @@ function animateclouds2() {
   ctx.drawImage(clouds.cloudImg, clouds.xcloud, 0, 375, 100);
   clouds.xcloud -= 2;
 }
+
 /*function to make 'Play Again' banner appear*/
 function animatebanner() {
   requestAnimationFrame(animatebanner);
@@ -224,8 +283,3 @@ function restart() {
   clouds.counter = 0;
   clouds.xcloud = canvas.width;
 }
-
-// /*function to cancel animation frame*/
-// function stopAnim() {
-//   cancelAnimationFrame(reqAnim);
-// }
