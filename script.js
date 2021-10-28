@@ -27,7 +27,6 @@ submit.restartSubmit.addEventListener("click", restart);
 let activePlants = [];
 let rainArray = [];
 let timer = 0;
-let reqAnim;
 /*Function for animated clouds when all plant reach growth stage 3 */
 let clouds = {
   cloudImg: new Image(),
@@ -126,8 +125,8 @@ function addWater() {
       };
       activePlants.push(plantDetail[i + 1][0]);
     }
+    /* checks if activePlants array contains all plants and if last plant is tomato3, then timer function runs animation*/
     if (activePlants.length === 9 && activePlants[8] === "tomato3") {
-      console.log(activePlants);
       // timer calls animate functions at set intervals for cloud, rain, and banner animations
       setInterval(function () {
         timer += 1;
@@ -160,6 +159,7 @@ function addWater() {
         }
       }, 1000);
     } else if (activePlants.length === 9 && activePlants[8] === "corn3") {
+      /* checks if activePlants array contains all plants and if last plant is corn3, then timer function runs animation*/
       setInterval(function () {
         timer += 1;
         if (timer === 3) {
@@ -191,6 +191,7 @@ function addWater() {
         }
       }, 1000);
     } else if (activePlants.length === 9 && activePlants[8] === "sunflower3") {
+      /* checks if activePlants array contains all plants and if last plant is sunflower3, then timer function runs animation*/
       setInterval(function () {
         timer += 1;
         if (timer === 3) {
@@ -280,6 +281,5 @@ function restart() {
   window.location.reload(false);
   activePlants = [];
   rainArray = [];
-  clouds.counter = 0;
   clouds.xcloud = canvas.width;
 }
