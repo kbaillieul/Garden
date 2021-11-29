@@ -1,4 +1,4 @@
-This is my second project through the Get Coding program that is currently under development. The intended function of this project is as follows:
+This is the second project I completed through the Get Coding program using HTML, CSS, and JavaScript. The intended function of this project is as follows:
 
 1. User selects a tomato, corn, or sunflower plant from the 'Add a Plant' dropdown and presses the Submit button.
 2. An image of the selected plant is added to the garden and an option for 'Water a Plant' is created.
