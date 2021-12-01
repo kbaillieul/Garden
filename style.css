@@ -4,6 +4,13 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+p {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 10px;
+}
+
 .logo {
   display: none;
 }
@@ -56,6 +63,26 @@ body {
   border-radius: 20px;
   box-shadow: 5px5px5px#eee;
   text-shadow: none;
+}
+
+#plantButton {
+  background: white;
+  color: #3a5a3c;
+  border: 1pxsolid#eee;
+  border-radius: 20px;
+  box-shadow: 5px5px5px#eee;
+  text-shadow: none;
+  font-weight: bold;
+}
+
+#waterButton {
+  background: white;
+  color: #3a5a3c;
+  border: 1pxsolid#eee;
+  border-radius: 20px;
+  box-shadow: 5px5px5px#eee;
+  text-shadow: none;
+  font-weight: bold;
 }
 
 @media only screen and (min-width: 768px) {
