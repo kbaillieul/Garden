@@ -1,4 +1,6 @@
-This is the second project I completed through the Get Coding program using HTML, CSS, and JavaScript. The intended function of this project is as follows:
+This is the second project I completed through the Get Coding program using HTML, CSS, and JavaScript. In this application, the user can add plants to a virtual garden then water the plants and watch them grow. I created this project because I thought a virtual garden would be a fun idea and wanted to try and challenge myself by creating animations using JavaScript.
+
+How it Works:
 
 1. User selects a tomato, corn, or sunflower plant from the 'Add a Plant' dropdown and presses the Submit button.
 2. An image of the selected plant is added to the garden and an option for 'Water a Plant' is created.
